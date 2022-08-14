@@ -4,13 +4,28 @@ const router = express.Router()
 const datos = []
 
 router.get("/", (req, res) => {
-    res.render('form', {datos});
+    try {
+        res.render('form', {datos});
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+   
 })
 router.get("/tablaEjs", (req, res) => {
-    res.render("partials/tabla", {datos});
+    try {
+        res.render("partials/tabla", {datos});
+    } catch (error) {
+        res.status(500).json({error: error})
+    }
+    
 })
 router.post("/personas", (req, res) => {
-    datos.push(req.body)
-    res.render('form', {datos});
+    try {
+        datos.push(req.body)
+        res.render('form', {datos});
+    } catch (error) {
+        res.status(500).json({error: error}) 
+    }
+    
 })
  module.exports= router;
